@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PACT Protocol - Enterprise Rate Card 2025</title>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --primary-light: #1e293b;
+            --accent: #0ea5e9;
+            --accent-light: #38bdf8;
+            --gold: #f59e0b;
+            --gold-light: #fbbf24;
+            --platinum: #94a3b8;
+            --dark: #0f172a;
+            --gray-100: #f8fafc;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-600: #475569;
+            --gray-800: #1e293b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --sovereign: #7c3aed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--gray-100);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1e3a5f 50%, var(--primary-light) 100%);
+            color: white;
+            padding: 80px 60px;
+            text-align: center;
+            border-radius: 24px;
+            margin-bottom: 60px;
+            box-shadow: 0 25px 80px rgba(15, 23, 42, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 24px;
+            font-weight: 300;
+        }
+
+        .header .tagline {
+            font-size: 1.1rem;
+            opacity: 0.7;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .header .version {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Platform Overview */
+        .platform-overview {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        .platform-overview h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .platform-includes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .platform-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: var(--gray-100);
+            border-radius: 12px;
+        }
+
+        .platform-item .icon {
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .platform-item h4 {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .platform-item p {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+
+        /* Tier Cards */
+        .tier-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .tier-card {
+            background: white;
+            border-radius: 24px;
+            padding: 50px 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .tier-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .tier-card.featured {
+            border-color: var(--accent);
+            background: linear-gradient(180deg, #f0f9ff 0%, white 100%);
+        }
+
+        .tier-card.sovereign {
+            border-color: var(--sovereign);
+            background: linear-gradient(180deg, #faf5ff 0%, white 100%);
+        }
+
+        .tier-card.featured::before {
+            content: 'RECOMMENDED';
+            position: absolute;
+            top: 24px;
+            right: -32px;
+            background: var(--accent);
+            color: white;
+            padding: 6px 45px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            transform: rotate(45deg);
+            letter-spacing: 1px;
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .tier-card:nth-child(1) .tier-badge { background: #dbeafe; color: #1e40af; }
+        .tier-card:nth-child(2) .tier-badge { background: #d1fae5; color: #047857; }
+        .tier-card:nth-child(3) .tier-badge { background: #fef3c7; color: #b45309; }
+        .tier-card:nth-child(4) .tier-badge { background: #ede9fe; color: #6d28d9; }
+
+        .tier-name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .tier-desc {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            min-height: 48px;
+        }
+
+        .tier-price {
+            margin: 30px 0;
+        }
+
+        .tier-price .amount {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .tier-price .period {
+            font-size: 1rem;
+            color: var(--gray-600);
+            font-weight: 400;
+        }
+
+        .tier-price .range {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .tier-specs {
+            background: var(--gray-100);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 30px 0;
+        }
+
+        .tier-spec {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .tier-spec:last-child {
+            border-bottom: none;
+        }
+
+        .tier-spec .label {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        .tier-spec .value {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .tier-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .tier-features li {
+            padding: 10px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--gray-800);
+        }
+
+        .tier-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: 700;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .tier-ideal {
+            background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-200) 100%);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-top: 20px;
+        }
+
+        .tier-ideal h5 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray-600);
+            margin-bottom: 8px;
+        }
+
+        .tier-ideal p {
+            font-size: 0.9rem;
+            color: var(--gray-800);
+        }
+
+        .tier-cta {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 30px;
+        }
+
+        .tier-cta:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .tier-card.featured .tier-cta {
+            background: linear-gradient(135deg, var(--accent) 0%, #0284c7 100%);
+        }
+
+        .tier-card.sovereign .tier-cta {
+            background: linear-gradient(135deg, var(--sovereign) 0%, #5b21b6 100%);
+        }
+
+        /* Section Headers */
+        .section-header {
+            background: var(--primary);
+            color: white;
+            padding: 28px 40px;
+            border-radius: 16px 16px 0 0;
+            margin-top: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .section-header .icon {
+            font-size: 1.8rem;
+        }
+
+        .section-header p {
+            opacity: 0.8;
+            margin-top: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* Pricing Tables */
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 0 0 16px 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+        }
+
+        .pricing-table th {
+            background: var(--gray-100);
+            padding: 20px 24px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--gray-800);
+            border-bottom: 2px solid var(--gray-200);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pricing-table td {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--gray-200);
+            vertical-align: top;
+        }
+
+        .pricing-table tr:hover {
+            background: var(--gray-100);
+        }
+
+        .pricing-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .service-name {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        .service-desc {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            margin-top: 4px;
+        }
+
+        .price {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .price-unit {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            font-weight: 400;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .price-note {
+            font-size: 0.8rem;
+            color: var(--gray-400);
+            font-style: italic;
+        }
+
+        /* Professional Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+            border-left: 4px solid var(--accent);
+        }
+
+        .service-card h3 {
+            color: var(--primary);
+            margin-bottom: 16px;
+            font-size: 1.25rem;
+        }
+
+        .service-card p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+        }
+
+        .service-card .price-range {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .service-card .price-range span {
+            font-size: 1rem;
+            color: var(--gray-600);
+            font-weight: 400;
+        }
+
+        /* Rates Table */
+        .rates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .rate-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .rate-card h4 {
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .rate-card .role {
+            color: var(--gray-600);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .rate-card .rate {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .rate-card .rate span {
+            font-size: 1rem;
+            color: var(--gray-600);
+            font-weight: 400;
+        }
+
+        /* Monthly Blocks */
+        .blocks-banner {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 40px 50px;
+            border-radius: 20px;
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .blocks-banner h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .blocks-banner p {
+            opacity: 0.8;
+            max-width: 500px;
+        }
+
+        .blocks-options {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .block-option {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 20px 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .block-option .amount {
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        .block-option .label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* Volume Discounts */
+        .discount-section {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin: 60px 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        .discount-section h3 {
+            text-align: center;
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin-bottom: 40px;
+        }
+
+        .discount-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .discount-item {
+            text-align: center;
+            padding: 30px;
+            background: var(--gray-100);
+            border-radius: 16px;
+        }
+
+        .discount-item .volume {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-bottom: 10px;
+        }
+
+        .discount-item .rate {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--success);
+        }
+
+        .discount-item .per {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+
+        /* Notes Section */
+        .notes-section {
+            background: var(--gray-100);
+            border-radius: 20px;
+            padding: 40px 50px;
+            margin: 60px 0;
+        }
+
+        .notes-section h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.25rem;
+        }
+
+        .notes-section ul {
+            list-style: none;
+        }
+
+        .notes-section li {
+            padding: 10px 0;
+            color: var(--gray-600);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .notes-section li::before {
+            content: '•';
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 60px;
+            border-radius: 24px;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .footer h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .footer .contact {
+            font-size: 1.5rem;
+            color: var(--accent-light);
+            margin: 30px 0;
+        }
+
+        .footer .legal {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .tier-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blocks-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .tier-card:hover {
+                transform: none;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>PACT Protocol</h1>
+                <p class="subtitle">Enterprise Compliance Infrastructure</p>
+                <p class="tagline">System-level compliance + AI + blockchain platform for banks, governments, and global enterprises</p>
+                <span class="version">Enterprise Rate Card | Effective January 2025</span>
+            </div>
+        </header>
+
+        <!-- Platform Overview -->
+        <section class="platform-overview">
+            <h2>All Tiers Include Complete Platform Access</h2>
+            <div class="platform-includes">
+                <div class="platform-item">
+                    <div class="icon">⚡</div>
+                    <div>
+                        <h4>PACT Engine</h4>
+                        <p>Core rules engine with deterministic evaluation</p>
+                    </div>
+                </div>
+                <div class="platform-item">
+                    <div class="icon">🤖</div>
+                    <div>
+                        <h4>PACT AI Layer</h4>
+                        <p>Risk scoring, monitoring, copilot, remediation</p>
+                    </div>
+                </div>
+                <div class="platform-item">
+                    <div class="icon">⛓️</div>
+                    <div>
+                        <h4>PACT Blockchain</h4>
+                        <p>Private chain with PoA consensus</p>
+                    </div>
+                </div>
+                <div class="platform-item">
+                    <div class="icon">🎛️</div>
+                    <div>
+                        <h4>Control Center</h4>
+                        <p>Unified admin console & tenant management</p>
+                    </div>
+                </div>
+                <div class="platform-item">
+                    <div class="icon">🔌</div>
+                    <div>
+                        <h4>Full Plugin Catalog</h4>
+                        <p>All 26+ compliance plugins included</p>
+                    </div>
+                </div>
+                <div class="platform-item">
+                    <div class="icon">🏗️</div>
+                    <div>
+                        <h4>Prod + Non-Prod</h4>
+                        <p>Production and development environments</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Licensing Tiers -->
+        <div class="tier-grid">
+            <!-- Pilot -->
+            <div class="tier-card">
+                <span class="tier-badge">Design Partner</span>
+                <div class="tier-name">Pilot</div>
+                <p class="tier-desc">Prove PACT's value with a focused implementation in one business unit</p>
+
+                <div class="tier-price">
+                    <span class="range">$1,000,000 – $1,500,000</span>
+                    <span class="period">/ 12 months</span>
+                </div>
+
+                <div class="tier-specs">
+                    <div class="tier-spec">
+                        <span class="label">Decisions</span>
+                        <span class="value">Up to 50M / year</span>
+                    </div>
+                    <div class="tier-spec">
+                        <span class="label">Jurisdictions</span>
+                        <span class="value">1–2</span>
+                    </div>
+                    <div class="tier-spec">
+                        <span class="label">Private Chain</span>
+                        <span class="value">1 chain (3 validators)</span>
+                    </div>
+                    <div class="tier-spec">
+                        <span class="label">Key Plugins</span>
+                        <span class="value">5 fully enabled</span>
+                    </div>
+                </div>
+
+                <ul class="tier-features">
+                    <li>Solution design & configuration</li>
+                    <li>1 migration/onboarding stream</li>
+                    <li>Quarterly executive reviews</li>
+                    <li>Priority support (8x5)</li>
+                    <li>Regulator-ready evidence packages</li>
+                </ul>
+
+                <div class="tier-ideal">
+                    <h5>Ideal For</h5>
+                    <p>Banks or fintechs validating PACT before enterprise-wide rollout</p>
+                </div>
+
+                <a href="#contact" class="tier-cta">Request Pilot Proposal</a>
+            </div>
+
+            <!-- Enterprise -->
+            <div class="tier-card featured">
+                <span class="tier-badge">Most Popular</span>
+                <div class="tier-name">Enterprise</div>
+                <p class="tier-desc">Complete platform for mid-to-large institutions with multi-product compliance needs</p>
+
+                <div class="tier-price">
+                    <span class="amount">$3,000,000</span>
+                    <span class="period">/ year</span>
+                </div>
+
+                <div class="tier-specs">
+                    <div class="tier-spec">
+                        <span class="label">Decisions</span>
+                        <span class="value">Up to 250M / year</span>
+                    </div>
+                    <div class="tier-spec">
+                        <span class="label">Tenants</span>
+                        <span class="value">Up to 10</span>
+                    </div>
+                    <div class="tier-spec">
+                        <span class="label">Private Chain</span>
+                        <span class="value">1 chain (5 validators)</span>
+                    </div>
+                    <div class="tier-spec">
+                        <span class="label">Plugins</span>
+                        <span class="value">All standard + AI Risk</span>
+                    </div>
+                </div>
+
+                <ul class="tier-features">
+                    <li>All standard plugins included</li>
+                    <li>AI Risk Scoring (PPRE)</li>
+                    <li>Live Monitoring & Anomaly Detection</li>
+                    <li>24/7 premium support</li>
+                    <li>Named customer success manager</li>
+                    <li>Dedicated technical lead</li>
+                </ul>
+
+                <div class="tier-ideal">
+                    <h5>Ideal For</h5>
+                    <p>Mid-to-large banks, card issuers, or fintechs with multi-product lines</p>
+                </div>
+
+                <a href="#contact" class="tier-cta">Contact Sales</a>
+            </div>
+
+            <!-- Enterprise Plus -->
+            <div class="tier-card">
+                <span class="tier-badge">System-Wide</span>
+                <div class="tier-name">Enterprise Plus</div>
+                <p class="tier-desc">Full platform deployment for global institutions with unlimited scale</p>
+
+                <div class="tier-price">
+                    <span class="amount">$5,000,000</span>
+                    <span class="period">/ year</span>
+                </div>
+
+                <div class="tier-specs">
+                    <div class="tier-spec">
+                        <span class="label">Decisions</span>
+                        <span class="value">Up to 1B / year</span>
+                    </div>
+                    <div class="tier-spec">
+                        <span class="label">Tenants</span>
+                        <span class="value">Unlimited</span>
+                    </div>
+                    <div class="tier-spec">
+                        <span class="label">Private Chains</span>
+                        <span class="value">2–3 (prod + regional)</span>
+                    </div>
+                    <div class="tier-spec">
+                        <span class="label">Regions</span>
+                        <span class="value">2 included</span>
+                    </div>
+                </div>
+
+                <ul class="tier-features">
+                    <li>All plugins + AI Copilot</li>
+                    <li>Auto-Remediation Engine</li>
+                    <li>Digital Twin / Compliance Sandbox</li>
+                    <li>Multi-region deployment</li>
+                    <li>Mission-critical support</li>
+                    <li>Dedicated engineering team</li>
+                </ul>
+
+                <div class="tier-ideal">
+                    <h5>Ideal For</h5>
+                    <p>Global banks, payment networks, large credit issuers, nationwide telecoms</p>
+                </div>
+
+                <a href="#contact" class="tier-cta">Contact Sales</a>
+            </div>
+
+            <!-- Sovereign -->
+            <div class="tier-card sovereign">
+                <span class="tier-badge">Government</span>
+                <div class="tier-name">Sovereign</div>
+                <p class="tier-desc">Dedicated sovereign cloud for governments, regulators, and national infrastructure</p>
+
+                <div class="tier-price">
+                    <span class="range">Starting at $8,000,000</span>
+                    <span class="period">/ year (often $10M+)</span>
+                </div>
+
+                <div class="tier-specs">
+                    <div class="tier-spec">
+                        <span class="label">Deployment</span>
+                        <span class="value">3+ sovereign regions</span>
+                    </div>
+                    <div class="tier-spec">
+                        <span class="label">Infrastructure</span>
+                        <span class="value">Dedicated / air-gapped</span>
+                    </div>
+                    <div class="tier-spec">
+                        <span class="label">Frameworks</span>
+                        <span class="value">Custom (tariffs, AML, tax)</span>
+                    </div>
+                    <div class="tier-spec">
+                        <span class="label">SLA</span>
+                        <span class="value">99.99% guaranteed</span>
+                    </div>
+                </div>
+
+                <ul class="tier-features">
+                    <li>Multi-region sovereign deployment</li>
+                    <li>Air-gapped / gov-cloud options</li>
+                    <li>Custom compliance frameworks</li>
+                    <li>Joint regulator working group</li>
+                    <li>Policy collaboration platform</li>
+                    <li>Certification support</li>
+                </ul>
+
+                <div class="tier-ideal">
+                    <h5>Ideal For</h5>
+                    <p>Ministries, regulators, supra-national bodies, national ID/KYC/AML infrastructure</p>
+                </div>
+
+                <a href="#contact" class="tier-cta">Request Custom Proposal</a>
+            </div>
+        </div>
+
+        <!-- Usage-Based Pricing -->
+        <div class="section-header">
+            <h2><span class="icon">📊</span> Platform Usage Pricing</h2>
+            <p>Applies across all tiers for overages and metered features</p>
+        </div>
+        <table class="pricing-table">
+            <thead>
+                <tr>
+                    <th width="25%">Component</th>
+                    <th width="40%">Description</th>
+                    <th width="20%">Rate</th>
+                    <th width="15%">Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><div class="service-name">Decision Overages</div></td>
+                    <td>Core engine decisions beyond included volume</td>
+                    <td>
+                        <span class="price">$0.0015</span>
+                        <span class="price-unit">per decision</span>
+                    </td>
+                    <td><span class="price-note">Down to $0.0005 at 1B+ with commitment</span></td>
+                </tr>
+                <tr>
+                    <td><div class="service-name">AI Risk Scoring (PPRE)</div></td>
+                    <td>Entity risk evaluation with predictive analysis</td>
+                    <td>
+                        <span class="price">$0.02</span>
+                        <span class="price-unit">per entity evaluation</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><div class="service-name">Anomaly Monitoring</div></td>
+                    <td>Real-time transaction analysis and pattern detection</td>
+                    <td>
+                        <span class="price">$0.01</span>
+                        <span class="price-unit">per transaction evaluated</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><div class="service-name">AI Copilot / Regulatory Copilot</div></td>
+                    <td>Natural language queries and rule generation assistance</td>
+                    <td>
+                        <span class="price">$0.08</span>
+                        <span class="price-unit">per query</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><div class="service-name">Auto-Remediation</div></td>
+                    <td>AI-generated remediation suggestions with approval workflow</td>
+                    <td>
+                        <span class="price">$0.15</span>
+                        <span class="price-unit">per suggestion applied</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><div class="service-name">LLM / Bedrock Infrastructure</div></td>
+                    <td>AWS Bedrock model inference (Claude, Llama, Titan)</td>
+                    <td>
+                        <span class="price">Pass-through</span>
+                        <span class="price-unit">+ 20–30% margin</span>
+                    </td>
+                    <td><span class="price-note">Margin varies by tier</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Blockchain Pricing -->
+        <div class="section-header">
+            <h2><span class="icon">⛓️</span> Blockchain & Anchoring</h2>
+            <p>Private chain validators and attestation services</p>
+        </div>
+        <table class="pricing-table">
+            <thead>
+                <tr>
+                    <th width="25%">Component</th>
+                    <th width="40%">Description</th>
+                    <th width="20%">Rate</th>
+                    <th width="15%">Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><div class="service-name">Additional Validators (Enterprise)</div></td>
+                    <td>Private chain validator nodes beyond included allocation</td>
+                    <td>
+                        <span class="price">$250,000</span>
+                        <span class="price-unit">per validator / year</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><div class="service-name">Additional Validators (Sovereign)</div></td>
+                    <td>Dedicated validator infrastructure for government deployments</td>
+                    <td>
+                        <span class="price">$300,000+</span>
+                        <span class="price-unit">per validator / year</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><div class="service-name">PACT Chain Anchoring</div></td>
+                    <td>Event hashes and attestations on private PACT chain</td>
+                    <td>
+                        <span class="price">$0.001</span>
+                        <span class="price-unit">per anchor</span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><div class="service-name">Cross-Chain Attestation</div></td>
+                    <td>Anchoring to public chains (Ethereum, Solana, Cosmos, Polkadot)</td>
+                    <td>
+                        <span class="price">$0.50</span>
+                        <span class="price-unit">per attestation + gas</span>
+                    </td>
+                    <td><span class="price-note">Gas fees passed through at cost</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Professional Services -->
+        <div class="section-header">
+            <h2><span class="icon">🛠️</span> Implementation & Professional Services</h2>
+            <p>Fixed-phase implementation for enterprise deployments (on top of platform license)</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Phase 1: Discovery & Architecture</h3>
+                <p>Requirements gathering, system design, integration architecture, compliance framework mapping, and proof-of-concept development</p>
+                <div class="price-range">$750,000 – $1,500,000 <span>/ 6–10 weeks</span></div>
+            </div>
+            <div class="service-card">
+                <h3>Phase 2: Pilot / First Use-Case</h3>
+                <p>Build and deploy first production use case, rule configuration, data integration, testing, and initial go-live</p>
+                <div class="price-range">$2,000,000 – $3,000,000</div>
+            </div>
+            <div class="service-card">
+                <h3>Phase 3: Production Roll-out</h3>
+                <p>Enterprise-wide deployment, additional integrations, multi-jurisdiction setup, training, and optimization</p>
+                <div class="price-range">$3,000,000 – $6,000,000 <span>/ varies by scope</span></div>
+            </div>
+            <div class="service-card" style="border-left-color: var(--gold);">
+                <h3>Large-Scale Deployment</h3>
+                <p>Complex implementations like nationwide AML infrastructure, multi-chain compliance systems, or cross-border payment networks</p>
+                <div class="price-range">$6,000,000 – $12,000,000+ <span>/ 12–18 months</span></div>
+            </div>
+        </div>
+
+        <!-- Hourly Rates -->
+        <h3 style="margin: 40px 0 20px; color: var(--primary); font-size: 1.25rem;">Consulting & Retainer Rates</h3>
+        <div class="rates-grid">
+            <div class="rate-card">
+                <h4>Principal Architect</h4>
+                <div class="role">System design, strategy, executive advisory</div>
+                <div class="rate">$1,250 <span>/ hour</span></div>
+            </div>
+            <div class="rate-card">
+                <h4>Senior Engineer</h4>
+                <div class="role">Core implementation, complex integrations</div>
+                <div class="rate">$650 – $850 <span>/ hour</span></div>
+            </div>
+            <div class="rate-card">
+                <h4>Implementation Engineer</h4>
+                <div class="role">Integration, configuration, deployment</div>
+                <div class="rate">$350 – $550 <span>/ hour</span></div>
+            </div>
+            <div class="rate-card">
+                <h4>Regulatory SME</h4>
+                <div class="role">Policy modeling, compliance framework design</div>
+                <div class="rate">$500 – $900 <span>/ hour</span></div>
+            </div>
+        </div>
+
+        <!-- Monthly Blocks -->
+        <div class="blocks-banner">
+            <div>
+                <h3>Monthly Engagement Blocks</h3>
+                <p>For ongoing deployments, bundle consulting hours into predictable monthly commitments instead of hourly billing</p>
+            </div>
+            <div class="blocks-options">
+                <div class="block-option">
+                    <div class="amount">$250K</div>
+                    <div class="label">per month</div>
+                </div>
+                <div class="block-option">
+                    <div class="amount">$500K</div>
+                    <div class="label">per month</div>
+                </div>
+                <div class="block-option">
+                    <div class="amount">Custom</div>
+                    <div class="label">by agreement</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Volume Discounts -->
+        <section class="discount-section">
+            <h3>Decision Volume Discounts</h3>
+            <p style="text-align: center; color: var(--gray-600); margin-bottom: 40px;">Committed annual volume pricing for decision overages</p>
+            <div class="discount-grid">
+                <div class="discount-item">
+                    <div class="volume">Base Rate</div>
+                    <div class="rate">$0.0015</div>
+                    <div class="per">per decision</div>
+                </div>
+                <div class="discount-item">
+                    <div class="volume">500M+ decisions</div>
+                    <div class="rate">$0.0010</div>
+                    <div class="per">per decision</div>
+                </div>
+                <div class="discount-item">
+                    <div class="volume">1B+ decisions</div>
+                    <div class="rate">$0.0007</div>
+                    <div class="per">per decision</div>
+                </div>
+                <div class="discount-item">
+                    <div class="volume">5B+ decisions</div>
+                    <div class="rate">$0.0005</div>
+                    <div class="per">per decision</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support -->
+        <div class="section-header">
+            <h2><span class="icon">🛡️</span> Support & SLA</h2>
+            <p>Support is included in platform tiers (not sold as tiny add-ons)</p>
+        </div>
+        <table class="pricing-table">
+            <thead>
+                <tr>
+                    <th>Support Level</th>
+                    <th>Response Time</th>
+                    <th>Availability</th>
+                    <th>Included In</th>
+                    <th>Standalone Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><div class="service-name">Priority Support</div></td>
+                    <td>4 hours</td>
+                    <td>Extended (8x5)</td>
+                    <td>Pilot tier and above</td>
+                    <td><span class="price-note">Included</span></td>
+                </tr>
+                <tr>
+                    <td><div class="service-name">Premium 24/7</div></td>
+                    <td>1 hour</td>
+                    <td>24/7</td>
+                    <td>Enterprise tier</td>
+                    <td>
+                        <span class="price">$500,000</span>
+                        <span class="price-unit">per year (if below $2M ARR)</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><div class="service-name">Mission Critical</div></td>
+                    <td>15 minutes</td>
+                    <td>24/7/365</td>
+                    <td>Enterprise Plus & Sovereign</td>
+                    <td>
+                        <span class="price">$1,200,000</span>
+                        <span class="price-unit">per year (if sold standalone)</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Notes -->
+        <section class="notes-section">
+            <h3>Terms & Conditions</h3>
+            <ul>
+                <li>All pricing in USD. Annual prepayment required for platform licenses.</li>
+                <li>Volume commitments locked at contract signing; overages billed quarterly in arrears.</li>
+                <li>Professional services invoiced monthly based on milestone or time-and-materials agreement.</li>
+                <li>Multi-year discounts available: 10% for 2-year, 20% for 3-year commitments.</li>
+                <li>Custom pricing available for non-profit organizations, educational institutions, and development banks.</li>
+                <li>All tiers include production + non-production environments. Additional environments available upon request.</li>
+                <li>Prices subject to annual adjustment with 90-day notice (typically inflation-indexed).</li>
+            </ul>
+        </section>
+
+        <!-- Limited SaaS Note -->
+        <div style="background: #fef3c7; border: 2px solid #f59e0b; border-radius: 16px; padding: 30px 40px; margin: 40px 0;">
+            <h4 style="color: #92400e; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                <span>⚠️</span> Limited SaaS Option
+            </h4>
+            <p style="color: #78350f;">
+                For smaller organizations with limited volume and no private chain requirement, a <strong>Limited SaaS</strong> option
+                is available starting at <strong>$750,000/year</strong>. This is offered on a case-by-case basis and is not the standard offering.
+                Contact sales to discuss eligibility.
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer" id="contact">
+            <h3>Ready to Transform Your Compliance Infrastructure?</h3>
+            <p>Contact our enterprise sales team to discuss your requirements and receive a custom proposal.</p>
+            <div class="contact">sales@pact-protocol.io</div>
+            <p style="font-size: 1rem;">+1 (888) PACT-NOW | Schedule a demo at pact-protocol.io/demo</p>
+            <div class="legal">
+                <p>PACT Protocol © 2025 | Enterprise Compliance Infrastructure</p>
+                <p>All prices confidential. Not for public distribution without authorization.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PACT Engine - Project Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #e8eaed;
+            --bg-hover: #f1f3f4;
+            --border-color: #dadce0;
+            --border-light: #e8eaed;
+            --text-primary: #202124;
+            --text-secondary: #5f6368;
+            --text-tertiary: #80868b;
+            --accent-blue: #1a73e8;
+            --accent-blue-light: #e8f0fe;
+            --accent-green: #1e8e3e;
+            --accent-green-light: #e6f4ea;
+            --accent-yellow: #f9ab00;
+            --accent-yellow-light: #fef7e0;
+            --accent-red: #d93025;
+            --accent-red-light: #fce8e6;
+            --accent-purple: #9334e6;
+            --accent-purple-light: #f3e8fd;
+            --accent-cyan: #12b5cb;
+            --accent-cyan-light: #e4f7fb;
+            --accent-orange: #fa903e;
+            --accent-orange-light: #feefe3;
+            --shadow-sm: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+            --shadow-md: 0 1px 3px 0 rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
+            --shadow-lg: 0 1px 3px 0 rgba(60,64,67,0.3), 0 8px 16px 4px rgba(60,64,67,0.15);
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            font-size: 14px;
+        }
+        
+        /* Top Navigation Bar */
+        .top-nav {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0 24px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        .logo-text {
+            color: var(--text-primary);
+        }
+        
+        .logo-text span {
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .nav-date {
+            padding: 8px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        
+        /* Page Header */
+        .page-header {
+            margin-bottom: 24px;
+        }
+        
+        .page-title {
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        
+        .page-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        /* Stats Cards Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .stat-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            transition: box-shadow 0.2s;
+        }
+        
+        .stat-card:hover {
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: 500;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+        
+        .stat-change {
+            font-size: 12px;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .stat-change.positive {
+            color: var(--accent-green);
+        }
+        
+        .stat-change.neutral {
+            color: var(--text-tertiary);
+        }
+        
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .content-grid.full {
+            grid-template-columns: 1fr;
+        }
+        
+        /* Card Component */
+        .card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+        
+        .card-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .card-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .card-title .icon {
+            font-size: 18px;
+        }
+        
+        .card-badge {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        .card-body.no-padding {
+            padding: 0;
+        }
+        
+        /* Architecture Layers */
+        .arch-layer {
+            display: flex;
+            align-items: stretch;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .arch-layer:last-child {
+            border-bottom: none;
+        }
+        
+        .arch-layer-label {
+            width: 180px;
+            padding: 16px 20px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+        
+        .arch-layer-content {
+            flex: 1;
+            padding: 12px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .arch-chip {
+            padding: 6px 12px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            font-size: 12px;
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+        
+        .arch-chip:hover {
+            background: var(--accent-blue-light);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+        
+        /* Component List */
+        .component-list {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .component-list.collapsed .component-item.hidden {
+            display: none;
+        }
+        
+        .component-list.expanded .component-item.hidden {
+            display: flex;
+        }
+        
+        .component-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border-light);
+            transition: background 0.15s;
+        }
+        
+        .component-item:last-child {
+            border-bottom: none;
+        }
+        
+        .component-item:hover {
+            background: var(--bg-hover);
+        }
+        
+        .component-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 14px;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        
+        .component-icon.blue { background: var(--accent-blue-light); }
+        .component-icon.green { background: var(--accent-green-light); }
+        .component-icon.purple { background: var(--accent-purple-light); }
+        .component-icon.yellow { background: var(--accent-yellow-light); }
+        .component-icon.red { background: var(--accent-red-light); }
+        .component-icon.cyan { background: var(--accent-cyan-light); }
+        .component-icon.orange { background: var(--accent-orange-light); }
+        
+        .component-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .component-name {
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 13px;
+            margin-bottom: 2px;
+        }
+        
+        .component-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .component-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        
+        .component-version {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            font-family: 'Roboto Mono', monospace;
+            background: var(--bg-secondary);
+            padding: 3px 8px;
+            border-radius: var(--radius-sm);
+        }
+        
+        .component-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+        }
+        
+        .component-status.active {
+            background: var(--accent-green-light);
+            color: var(--accent-green);
+        }
+        
+        .component-status.beta {
+            background: var(--accent-yellow-light);
+            color: #b06000;
+        }
+        
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        
+        /* Tabs */
+        .tabs-container {
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 0;
+            padding: 0 20px;
+            background: var(--bg-secondary);
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 0;
+        }
+        
+        .tab {
+            padding: 14px 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: all 0.2s;
+        }
+        
+        .tab:hover {
+            color: var(--accent-blue);
+        }
+        
+        .tab.active {
+            color: var(--accent-blue);
+            border-bottom-color: var(--accent-blue);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* IP Cards Grid */
+        .ip-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            padding: 20px;
+        }
+        
+        .ip-card {
+            padding: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            transition: all 0.2s;
+        }
+        
+        .ip-card:hover {
+            border-color: var(--accent-purple);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .ip-type {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 3px 8px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 10px;
+        }
+        
+        .ip-type.patent {
+            background: var(--accent-purple-light);
+            color: var(--accent-purple);
+        }
+        
+        .ip-type.trademark {
+            background: var(--accent-cyan-light);
+            color: var(--accent-cyan);
+        }
+        
+        .ip-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+        
+        .ip-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        /* Docs Grid */
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            padding: 20px;
+        }
+        
+        .doc-item {
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        
+        .doc-item:hover {
+            border-color: var(--accent-blue);
+            background: var(--accent-blue-light);
+        }
+        
+        .doc-icon {
+            font-size: 20px;
+        }
+        
+        .doc-name {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        /* Section Divider */
+        .section-divider {
+            height: 24px;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 32px;
+            color: var(--text-tertiary);
+            font-size: 12px;
+            border-top: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            margin-top: 24px;
+        }
+        
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* View All Link */
+        .view-all {
+            padding: 12px 20px;
+            text-align: center;
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .view-all a {
+            font-size: 13px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .view-all a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .stats-row {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .ip-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .docs-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .arch-layer {
+                flex-direction: column;
+            }
+            .arch-layer-label {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border-light);
+            }
+            .ip-grid, .docs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <div class="logo">
+                <div class="logo-icon">P</div>
+                <div class="logo-text">PACT <span>Engine</span></div>
+            </div>
+        </div>
+        <div class="nav-right">
+            <div class="nav-date">
+                <span>📅</span>
+                December 08, 2025
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Project Overview</h1>
+            <p class="page-subtitle">Policy-as-Code Transaction Engine for Enterprise Compliance | Version 0.1.0</p>
+        </div>
+        
+        <!-- Stats Row -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-label">Core Packages</div>
+                <div class="stat-value">20</div>
+                <div class="stat-change positive">
+                    <span>↑</span> TypeScript monorepo
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Applications</div>
+                <div class="stat-value">10</div>
+                <div class="stat-change positive">
+                    <span>↑</span> Microservices
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Plugins</div>
+                <div class="stat-value">28</div>
+                <div class="stat-change positive">
+                    <span>↑</span> Compliance domains
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Cloud Services</div>
+                <div class="stat-value">14</div>
+                <div class="stat-change neutral">
+                    <span>→</span> SaaS platform
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Files</div>
+                <div class="stat-value">1,680</div>
+                <div class="stat-change positive">
+                    <span>↑</span> Source files
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Patents & IP</div>
+                <div class="stat-value">11</div>
+                <div class="stat-change neutral">
+                    <span>→</span> Filed
+                </div>
+            </div>
+        </div>
+        
+        <!-- Architecture Section -->
+        <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="icon">🏗️</span>
+                    System Architecture
+                </div>
+                <span class="card-badge">6 Layers</span>
+            </div>
+            <div class="card-body no-padding">
+                <div class="arch-layer">
+                    <div class="arch-layer-label" style="color: #d93025;">
+                        <span>🎨</span> Presentation
+                    </div>
+                    <div class="arch-layer-content">
+                        <span class="arch-chip">Control Center</span>
+                        <span class="arch-chip">PACT UI Dashboard</span>
+                        <span class="arch-chip">Chain Explorer</span>
+                        <span class="arch-chip">Regulator Portal</span>
+                    </div>
+                </div>
+                <div class="arch-layer">
+                    <div class="arch-layer-label" style="color: #1a73e8;">
+                        <span>🔌</span> API Gateway
+                    </div>
+                    <div class="arch-layer-content">
+                        <span class="arch-chip">REST API Gateway</span>
+                        <span class="arch-chip">gRPC Gateway</span>
+                        <span class="arch-chip">WebSocket Gateway</span>
+                        <span class="arch-chip">GraphQL API</span>
+                    </div>
+                </div>
+                <div class="arch-layer">
+                    <div class="arch-layer-label" style="color: #9334e6;">
+                        <span>🧠</span> AI & Intelligence
+                    </div>
+                    <div class="arch-layer-content">
+                        <span class="arch-chip">AI Cortex</span>
+                        <span class="arch-chip">Risk Engine (PPRE)</span>
+                        <span class="arch-chip">AI Copilot</span>
+                        <span class="arch-chip">Anomaly Detection</span>
+                        <span class="arch-chip">NL Rules Engine</span>
+                        <span class="arch-chip">Predictive Compliance</span>
+                    </div>
+                </div>
+                <div class="arch-layer">
+                    <div class="arch-layer-label" style="color: #1e8e3e;">
+                        <span>⚙️</span> Core Engine
+                    </div>
+                    <div class="arch-layer-content">
+                        <span class="arch-chip">RTVM</span>
+                        <span class="arch-chip">Policy Evaluator</span>
+                        <span class="arch-chip">Rule Registry</span>
+                        <span class="arch-chip">Event Mesh</span>
+                        <span class="arch-chip">Decision Engine</span>
+                    </div>
+                </div>
+                <div class="arch-layer">
+                    <div class="arch-layer-label" style="color: #f9ab00;">
+                        <span>🔗</span> Blockchain
+                    </div>
+                    <div class="arch-layer-content">
+                        <span class="arch-chip">Chain Core</span>
+                        <span class="arch-chip">PoA Consensus</span>
+                        <span class="arch-chip">Multi-Chain Adapters</span>
+                        <span class="arch-chip">Audit Anchoring</span>
+                        <span class="arch-chip">NFT Rules</span>
+                    </div>
+                </div>
+                <div class="arch-layer">
+                    <div class="arch-layer-label" style="color: #fa903e;">
+                        <span>📊</span> Data & Storage
+                    </div>
+                    <div class="arch-layer-content">
+                        <span class="arch-chip">PostgreSQL</span>
+                        <span class="arch-chip">Redis Cache</span>
+                        <span class="arch-chip">TimescaleDB</span>
+                        <span class="arch-chip">Audit Logs</span>
+                        <span class="arch-chip">Merkle Trees</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Core Packages & Applications -->
+        <div class="content-grid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="icon">📦</span>
+                        Core Packages
+                    </div>
+                    <span class="card-badge">20 packages</span>
+                </div>
+                <div class="card-body no-padding">
+                    <div class="component-list collapsed" id="packages-list">
+                        <div class="component-item">
+                            <div class="component-icon blue">⚙️</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/core</div>
+                                <div class="component-desc">RTVM, Policy Evaluator, Rule Registry, GRL Spec</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item">
+                            <div class="component-icon purple">🧠</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/ai-core</div>
+                                <div class="component-desc">AI utilities, Bedrock integration, guardrails</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item">
+                            <div class="component-icon purple">📊</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/ai-risk</div>
+                                <div class="component-desc">Predictive Risk Engine (PPRE) for entity risk scoring</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item">
+                            <div class="component-icon purple">💬</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/ai-copilot</div>
+                                <div class="component-desc">Decision explanation and rule authoring assistance</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item">
+                            <div class="component-icon purple">🔍</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/ai-monitor</div>
+                                <div class="component-desc">Live monitoring and AI-Aware Mode for anomaly detection</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item">
+                            <div class="component-icon purple">🔧</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/ai-remediation</div>
+                                <div class="component-desc">Auto-remediation suggestions with human approval workflow</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item hidden">
+                            <div class="component-icon yellow">⛓️</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/blockchain</div>
+                                <div class="component-desc">Multi-chain adapters: EVM, Solana, Cosmos, Polkadot, Hyperledger</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item hidden">
+                            <div class="component-icon yellow">🔗</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/chain-core</div>
+                                <div class="component-desc">Pure, deterministic blockchain engine - blocks, transactions, merkle</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item hidden">
+                            <div class="component-icon yellow">⚡</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/chain-node</div>
+                                <div class="component-desc">Blockchain node service with mempool and PoA mining</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item hidden">
+                            <div class="component-icon yellow">📡</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/chain-client</div>
+                                <div class="component-desc">Client library for interacting with PACT blockchain</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item hidden">
+                            <div class="component-icon green">🔌</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/plugin-sdk</div>
+                                <div class="component-desc">SDK for building PACT Protocol domain plugins</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item hidden">
+                            <div class="component-icon blue">🌐</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/api-gateway</div>
+                                <div class="component-desc">Enterprise REST API Gateway - unified API access</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item hidden">
+                            <div class="component-icon blue">🎛️</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/control-sdk</div>
+                                <div class="component-desc">SDK for integrating with PACT Control Center APIs</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">1.0.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item hidden">
+                            <div class="component-icon green">🔐</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/crypto</div>
+                                <div class="component-desc">Cryptographic utilities - Merkle trees, ZK proofs, event logs</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item hidden">
+                            <div class="component-icon blue">📝</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/types</div>
+                                <div class="component-desc">Shared types and interfaces for PACT Protocol</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item hidden">
+                            <div class="component-icon blue">⚖️</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/compliance-types</div>
+                                <div class="component-desc">Compliance domain types - jurisdictions, KYC, sanctions, disputes</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item hidden">
+                            <div class="component-icon blue">🛠️</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/utils</div>
+                                <div class="component-desc">Shared utilities - caching, DB, metrics, resilience, middleware</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item hidden">
+                            <div class="component-icon orange">🎮</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/demo</div>
+                                <div class="component-desc">Interactive demos for clients and developers</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">1.0.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item hidden">
+                            <div class="component-icon green">🧪</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/testing</div>
+                                <div class="component-desc">Testing utilities - mocks, factories, fixtures, helpers</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item hidden">
+                            <div class="component-icon green">📋</div>
+                            <div class="component-info">
+                                <div class="component-name">@pact/test-data</div>
+                                <div class="component-desc">Test fixtures and sample data for PACT Protocol</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="view-all">
+                    <a onclick="toggleList('packages-list', this)">View all 20 packages →</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="icon">🖥️</span>
+                        Applications
+                    </div>
+                    <span class="card-badge">10 apps</span>
+                </div>
+                <div class="card-body no-padding">
+                    <div class="component-list collapsed" id="apps-list">
+                        <div class="component-item">
+                            <div class="component-icon red">🎛️</div>
+                            <div class="component-info">
+                                <div class="component-name">PACT Control Center</div>
+                                <div class="component-desc">Unified Admin Console (Next.js 14, Tailwind)</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item">
+                            <div class="component-icon blue">🔧</div>
+                            <div class="component-info">
+                                <div class="component-name">PACT Orchestrator</div>
+                                <div class="component-desc">Control Plane API Backend (Express, PostgreSQL)</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item">
+                            <div class="component-icon blue">📡</div>
+                            <div class="component-info">
+                                <div class="component-name">PACT Core Service</div>
+                                <div class="component-desc">Rules Engine HTTP API - entities, events, rules</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item">
+                            <div class="component-icon purple">🧠</div>
+                            <div class="component-info">
+                                <div class="component-name">PACT Cortex Service</div>
+                                <div class="component-desc">AI meta-engine for analysis, proposals, simulations</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item">
+                            <div class="component-icon purple">🤖</div>
+                            <div class="component-info">
+                                <div class="component-name">PACT AI API</div>
+                                <div class="component-desc">HTTP API for risk, monitoring, copilot, remediation</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item hidden">
+                            <div class="component-icon purple">🔀</div>
+                            <div class="component-info">
+                                <div class="component-name">PACT AI Gateway</div>
+                                <div class="component-desc">OpenRouter integration - multi-model AI orchestration</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item hidden">
+                            <div class="component-icon purple">⚡</div>
+                            <div class="component-info">
+                                <div class="component-name">PACT AI Worker</div>
+                                <div class="component-desc">Background processor for event monitoring and risk scoring</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item hidden">
+                            <div class="component-icon yellow">⛓️</div>
+                            <div class="component-info">
+                                <div class="component-name">PACT Chain Node API</div>
+                                <div class="component-desc">Blockchain node HTTP API - transactions, blocks</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item hidden">
+                            <div class="component-icon cyan">🔍</div>
+                            <div class="component-info">
+                                <div class="component-name">PACT Chain Explorer</div>
+                                <div class="component-desc">Blockchain Explorer Web UI - browse blocks, transactions</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">0.1.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                        <div class="component-item hidden">
+                            <div class="component-icon red">📊</div>
+                            <div class="component-info">
+                                <div class="component-name">PACT UI</div>
+                                <div class="component-desc">Client-facing dashboard - alerts, decisions, rules, reports</div>
+                            </div>
+                            <div class="component-meta">
+                                <span class="component-version">1.0.0</span>
+                                <span class="component-status active"><span class="status-dot"></span>Active</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="view-all">
+                    <a onclick="toggleList('apps-list', this)">View all 10 applications →</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Plugins Section -->
+        <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="icon">🔌</span>
+                    Compliance Plugins
+                </div>
+                <span class="card-badge">28 plugins</span>
+            </div>
+            <div class="tabs-container">
+                <div class="tabs">
+                    <div class="tab active" onclick="showTab('aml-kyc')">AML & KYC (6)</div>
+                    <div class="tab" onclick="showTab('ai-plugins')">AI & Intelligence (6)</div>
+                    <div class="tab" onclick="showTab('blockchain-plugins')">Blockchain (4)</div>
+                    <div class="tab" onclick="showTab('reporting')">Reporting (3)</div>
+                    <div class="tab" onclick="showTab('enterprise')">Enterprise (9)</div>
+                </div>
+            </div>
+            
+            <div id="aml-kyc" class="tab-content active">
+                <div class="component-list">
+                    <div class="component-item">
+                        <div class="component-icon red">🔍</div>
+                        <div class="component-info">
+                            <div class="component-name">AML Monitor Plugin</div>
+                            <div class="component-desc">Transaction monitoring - structuring, velocity, blacklist, jurisdiction rules</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon red">📋</div>
+                        <div class="component-info">
+                            <div class="component-name">KYC Verification Plugin</div>
+                            <div class="component-desc">Document verification, beneficial ownership tracking, PEP screening</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon orange">🌍</div>
+                        <div class="component-info">
+                            <div class="component-name">Cross-Border Plugin</div>
+                            <div class="component-desc">Multi-jurisdiction orchestration, currency compliance, sanctions screening</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon yellow">🔐</div>
+                        <div class="component-info">
+                            <div class="component-name">Crypto Wallet Compliance</div>
+                            <div class="component-desc">Travel rule, sanctions screening, flow monitoring, blockchain attestations</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon orange">⚠️</div>
+                        <div class="component-info">
+                            <div class="component-name">Risk Alerts Plugin</div>
+                            <div class="component-desc">Risk scoring and multi-channel alerting - email, webhook, internal</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon green">✅</div>
+                        <div class="component-info">
+                            <div class="component-name">Counterparty Attestation</div>
+                            <div class="component-desc">Real-time compliance verification using proofs and decentralized identity</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="ai-plugins" class="tab-content">
+                <div class="component-list">
+                    <div class="component-item">
+                        <div class="component-icon purple">👁️</div>
+                        <div class="component-info">
+                            <div class="component-name">AI Supervisory Agent</div>
+                            <div class="component-desc">Regulator Overseer - monitors rule performance, risk drift, evasion patterns</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon purple">📚</div>
+                        <div class="component-info">
+                            <div class="component-name">RegDoc AI Plugin</div>
+                            <div class="component-desc">Regulatory documentation and compliance AI - knowledge base, Q&A</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon purple">💬</div>
+                        <div class="component-info">
+                            <div class="component-name">Regulatory Co-Pilot</div>
+                            <div class="component-desc">LLM-powered assistant - query parsing, rule generation, intelligent insights</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon purple">📝</div>
+                        <div class="component-info">
+                            <div class="component-name">NL Rules Plugin</div>
+                            <div class="component-desc">Natural language to PACT rules with automatic conflict detection</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon purple">🔮</div>
+                        <div class="component-info">
+                            <div class="component-name">Predictive Compliance</div>
+                            <div class="component-desc">AI-powered risk prediction, failure pattern analysis, regulatory impact</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon purple">🕸️</div>
+                        <div class="component-info">
+                            <div class="component-name">Compliance Knowledge Graph</div>
+                            <div class="component-desc">Live graph mapping rules, entities, jurisdictions, and decisions</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="blockchain-plugins" class="tab-content">
+                <div class="component-list">
+                    <div class="component-item">
+                        <div class="component-icon yellow">⚓</div>
+                        <div class="component-info">
+                            <div class="component-name">Blockchain Anchoring</div>
+                            <div class="component-desc">Multi-chain anchoring with Merkle rollups and zero-trust proofs</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon yellow">📜</div>
+                        <div class="component-info">
+                            <div class="component-name">Smart Contract Bridge</div>
+                            <div class="component-desc">PACT rules to Solidity/Vyper, on-chain attestations, DeFi integration</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon green">🎫</div>
+                        <div class="component-info">
+                            <div class="component-name">Credential Marketplace</div>
+                            <div class="component-desc">Issue and monetize portable compliance proofs (AML, KYC, Tax)</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon blue">🔌</div>
+                        <div class="component-info">
+                            <div class="component-name">Protocol Integration</div>
+                            <div class="component-desc">gRPC, Kafka, and blockchain adapters for data integration</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="reporting" class="tab-content">
+                <div class="component-list">
+                    <div class="component-item">
+                        <div class="component-icon blue">📊</div>
+                        <div class="component-info">
+                            <div class="component-name">Regulatory Reporting</div>
+                            <div class="component-desc">Auto-generate SAR/CTR reports with jurisdiction-specific formatting</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon green">📝</div>
+                        <div class="component-info">
+                            <div class="component-name">Audit Log Plugin</div>
+                            <div class="component-desc">Audit trail and evidence logging with PostgreSQL and memory storage</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon yellow">💰</div>
+                        <div class="component-info">
+                            <div class="component-name">Tax Vault Plugin</div>
+                            <div class="component-desc">Enterprise blockchain tax automation, multi-jurisdiction calculation, reconciliation</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="enterprise" class="tab-content">
+                <div class="component-list">
+                    <div class="component-item">
+                        <div class="component-icon blue">🏢</div>
+                        <div class="component-info">
+                            <div class="component-name">Multi-Tenant Plugin</div>
+                            <div class="component-desc">White-label deployment, tenant isolation, usage-based billing</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon green">📚</div>
+                        <div class="component-info">
+                            <div class="component-name">Rule Versioning</div>
+                            <div class="component-desc">Track changes, migrate regulations, rollback for testing</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon purple">👥</div>
+                        <div class="component-info">
+                            <div class="component-name">Policy Collaboration</div>
+                            <div class="component-desc">GitHub for Government Policy - co-authoring, approvals, version diffs</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon orange">🧪</div>
+                        <div class="component-info">
+                            <div class="component-name">Compliance Sandbox</div>
+                            <div class="component-desc">Digital Twin - simulate policy changes in a safe cloned environment</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon red">⚖️</div>
+                        <div class="component-info">
+                            <div class="component-name">Dispute Resolution</div>
+                            <div class="component-desc">Arbitration for false positives, regulatory conflicts, consumer rights</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon blue">🤖</div>
+                        <div class="component-info">
+                            <div class="component-name">Autonomous Enforcement</div>
+                            <div class="component-desc">Risk response engine with rule-action bindings for auto enforcement</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon green">🧪</div>
+                        <div class="component-info">
+                            <div class="component-name">Testing Sandbox</div>
+                            <div class="component-desc">Simulate transactions, generate test scenarios, regression testing</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon red">🛡️</div>
+                        <div class="component-info">
+                            <div class="component-name">PACT AML Plugin</div>
+                            <div class="component-desc">Anti-Money Laundering compliance domain plugin</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">1.0.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon yellow">🏦</div>
+                        <div class="component-info">
+                            <div class="component-name">PACT Loans Plugin</div>
+                            <div class="component-desc">Loan compliance with Solidity smart contracts - CollateralVault, LoanNFT</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cloud Services -->
+        <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="icon">☁️</span>
+                    PACT Cloud Services
+                </div>
+                <span class="card-badge">14 services</span>
+            </div>
+            <div class="card-body no-padding">
+                <div class="component-list collapsed" id="cloud-list">
+                    <div class="component-item">
+                        <div class="component-icon purple">🧠</div>
+                        <div class="component-info">
+                            <div class="component-name">AI Cortex Service</div>
+                            <div class="component-desc">NLP policy authoring, anomaly detection, explainability engine</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon blue">🏢</div>
+                        <div class="component-info">
+                            <div class="component-name">Tenant Service</div>
+                            <div class="component-desc">CRUD tenants, assign plugins & jurisdictions, manage tiers & SLAs</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon green">🔐</div>
+                        <div class="component-info">
+                            <div class="component-name">License Authority (PLA)</div>
+                            <div class="component-desc">Issue and verify cryptographically signed license tokens</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon yellow">📊</div>
+                        <div class="component-info">
+                            <div class="component-name">Usage Metering</div>
+                            <div class="component-desc">Track decisions, API requests, plugin calls per tenant</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon green">✅</div>
+                        <div class="component-info">
+                            <div class="component-name">Attestation Service</div>
+                            <div class="component-desc">TPM/vTPM attestation and deployment integrity verification</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon blue">📝</div>
+                        <div class="component-info">
+                            <div class="component-name">Audit Service</div>
+                            <div class="component-desc">Audit logging, compliance reporting, blockchain anchoring</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item hidden">
+                        <div class="component-icon orange">⚡</div>
+                        <div class="component-info">
+                            <div class="component-name">Realtime Gateway</div>
+                            <div class="component-desc">WebSocket event streaming for live compliance alerts</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item hidden">
+                        <div class="component-icon purple">📰</div>
+                        <div class="component-info">
+                            <div class="component-name">Regulatory Feed</div>
+                            <div class="component-desc">Auto-ingest updates from SEC, FinCEN, FATF, EU regulators</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item hidden">
+                        <div class="component-icon blue">🔄</div>
+                        <div class="component-info">
+                            <div class="component-name">Rule Engine Service</div>
+                            <div class="component-desc">Hot-reload policies without downtime</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item hidden">
+                        <div class="component-icon blue">🛡️</div>
+                        <div class="component-info">
+                            <div class="component-name">Decision Middleware</div>
+                            <div class="component-desc">Auth, tenant, license, and plugin enforcement middleware</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item hidden">
+                        <div class="component-icon green">🤖</div>
+                        <div class="component-info">
+                            <div class="component-name">Compliance Automation</div>
+                            <div class="component-desc">Regulation Packs, Calendar, Evidence Collection, Export Formats</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item hidden">
+                        <div class="component-icon cyan">🏢</div>
+                        <div class="component-info">
+                            <div class="component-name">Enterprise Service</div>
+                            <div class="component-desc">Multi-region, RBAC, SSO/SAML, Hierarchy, White-label branding</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item hidden">
+                        <div class="component-icon blue">👨‍💻</div>
+                        <div class="component-info">
+                            <div class="component-name">Developer Experience</div>
+                            <div class="component-desc">SDKs, Terraform Provider, GraphQL API, Sandbox Environment</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item hidden">
+                        <div class="component-icon green">👁️</div>
+                        <div class="component-info">
+                            <div class="component-name">Observability & Trust</div>
+                            <div class="component-desc">ZK Proofs, Benchmarking, Dashboard, Incident Response Playbooks</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">0.1.0</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="view-all">
+                <a onclick="toggleList('cloud-list', this)">View all 14 cloud services →</a>
+            </div>
+        </div>
+        
+        <!-- IP & Documentation Row -->
+        <div class="content-grid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="icon">📜</span>
+                        Intellectual Property
+                    </div>
+                    <span class="card-badge">11 patents + 5 TM</span>
+                </div>
+                <div class="card-body no-padding">
+                    <div class="ip-grid" style="grid-template-columns: 1fr 1fr;">
+                        <div class="ip-card">
+                            <span class="ip-type patent">Patent A</span>
+                            <div class="ip-title">RTVM - Deterministic Regulatory VM</div>
+                            <div class="ip-desc">Deterministic execution engine for regulatory policy evaluation</div>
+                        </div>
+                        <div class="ip-card">
+                            <span class="ip-type patent">Patent B</span>
+                            <div class="ip-title">AI Governance Framework</div>
+                            <div class="ip-desc">Human-in-the-loop AI with explainable decisions</div>
+                        </div>
+                        <div class="ip-card">
+                            <span class="ip-type patent">Patent C</span>
+                            <div class="ip-title">Multi-Ledger Blockchain Anchoring</div>
+                            <div class="ip-desc">Cross-chain compliance data anchoring and provenance</div>
+                        </div>
+                        <div class="ip-card">
+                            <span class="ip-type patent">Patent D</span>
+                            <div class="ip-title">Plugin Framework</div>
+                            <div class="ip-desc">Modular regulatory compliance enforcement architecture</div>
+                        </div>
+                        <div class="ip-card">
+                            <span class="ip-type patent">Patent E</span>
+                            <div class="ip-title">Distributed Agents</div>
+                            <div class="ip-desc">Autonomous compliance agents with federated execution</div>
+                        </div>
+                        <div class="ip-card">
+                            <span class="ip-type patent">Patent 001</span>
+                            <div class="ip-title">Natural Language Compliance Query</div>
+                            <div class="ip-desc">NLP-based compliance query processing system</div>
+                        </div>
+                        <div class="ip-card">
+                            <span class="ip-type patent">Patent 002</span>
+                            <div class="ip-title">Multi-Chain Compliance Data Anchoring</div>
+                            <div class="ip-desc">Cross-chain data anchoring system</div>
+                        </div>
+                        <div class="ip-card">
+                            <span class="ip-type patent">Patent 003</span>
+                            <div class="ip-title">Semantic Policy Version Control</div>
+                            <div class="ip-desc">Intelligent versioning for regulatory policies</div>
+                        </div>
+                        <div class="ip-card">
+                            <span class="ip-type patent">Patent 004</span>
+                            <div class="ip-title">Intelligent Arbitrator Assignment</div>
+                            <div class="ip-desc">AI-driven arbitrator selection system</div>
+                        </div>
+                        <div class="ip-card">
+                            <span class="ip-type patent">Patent 005</span>
+                            <div class="ip-title">Portable Compliance Credentials</div>
+                            <div class="ip-desc">Transferable compliance attestation system</div>
+                        </div>
+                        <div class="ip-card">
+                            <span class="ip-type patent">Patent 006</span>
+                            <div class="ip-title">Consensus Policy Approval Workflow</div>
+                            <div class="ip-desc">Distributed policy approval mechanism</div>
+                        </div>
+                        <div class="ip-card">
+                            <span class="ip-type trademark">Trademarks</span>
+                            <div class="ip-title">PACT Family</div>
+                            <div class="ip-desc">PACT ENGINE, PACT, PACT CLOUD, PACT AI, PACT BLOCKCHAIN</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="icon">📚</span>
+                        Documentation
+                    </div>
+                    <span class="card-badge">65+ docs</span>
+                </div>
+                <div class="card-body no-padding">
+                    <div class="docs-grid" style="grid-template-columns: 1fr 1fr;">
+                        <div class="doc-item">
+                            <span class="doc-icon">📖</span>
+                            <span class="doc-name">Admin Guide</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-icon">👤</span>
+                            <span class="doc-name">User Guide</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-icon">🏗️</span>
+                            <span class="doc-name">Architecture</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-icon">🔐</span>
+                            <span class="doc-name">Security Model</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-icon">📡</span>
+                            <span class="doc-name">API Reference</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-icon">🚀</span>
+                            <span class="doc-name">Deployment</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-icon">⚖️</span>
+                            <span class="doc-name">Legal & Licensing</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-icon">🎓</span>
+                            <span class="doc-name">Training</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-icon">📊</span>
+                            <span class="doc-name">Collaterals</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-icon">🔧</span>
+                            <span class="doc-name">Runbooks</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-icon">🧪</span>
+                            <span class="doc-name">Testing Guide</span>
+                        </div>
+                        <div class="doc-item">
+                            <span class="doc-icon">📋</span>
+                            <span class="doc-name">System Requirements</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Infrastructure -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="icon">🏗️</span>
+                    Infrastructure (AWS CDK)
+                </div>
+                <span class="card-badge">3 stacks</span>
+            </div>
+            <div class="card-body no-padding">
+                <div class="component-list">
+                    <div class="component-item">
+                        <div class="component-icon orange">☁️</div>
+                        <div class="component-info">
+                            <div class="component-name">pact-ai-infra</div>
+                            <div class="component-desc">AWS Bedrock integration, AI Bridge Service Stack</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">CDK</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon yellow">⛓️</div>
+                        <div class="component-info">
+                            <div class="component-name">pact-chain-cdk</div>
+                            <div class="component-desc">Blockchain infrastructure - Fargate nodes, Amazon Managed Blockchain</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">CDK</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                    <div class="component-item">
+                        <div class="component-icon red">🎛️</div>
+                        <div class="component-info">
+                            <div class="component-name">pact-control-center-cdk</div>
+                            <div class="component-desc">Control Center deployment - Auth, Backend, Frontend stacks</div>
+                        </div>
+                        <div class="component-meta">
+                            <span class="component-version">CDK</span>
+                            <span class="component-status active"><span class="status-dot"></span>Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <p>PACT Protocol © 2025 | Policy-as-Code Transaction Engine</p>
+        <p style="margin-top: 8px;">Generated on December 08, 2025 at 08:25 • <a href="PROJECT-STRUCTURE.html">View File Structure</a></p>
+    </footer>
+    
+    <script>
+        function showTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+        
+        function toggleList(listId, linkElement) {
+            const list = document.getElementById(listId);
+            const isCollapsed = list.classList.contains('collapsed');
+            
+            if (isCollapsed) {
+                list.classList.remove('collapsed');
+                list.classList.add('expanded');
+                linkElement.textContent = 'Show less ↑';
+            } else {
+                list.classList.remove('expanded');
+                list.classList.add('collapsed');
+                
+                // Update link text based on list type
+                if (listId === 'packages-list') {
+                    linkElement.textContent = 'View all 20 packages →';
+                } else if (listId === 'apps-list') {
+                    linkElement.textContent = 'View all 10 applications →';
+                } else if (listId === 'cloud-list') {
+                    linkElement.textContent = 'View all 14 cloud services →';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
