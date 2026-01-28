@@ -127,11 +127,19 @@ This documentation covers ARKA Engine version **1.0.0**.
 
 ## Support
 
-- **GitHub Issues**: [github.com/arka-engine/pact/issues](https://github.com/arka-engine/pact/issues)
-- **Documentation Issues**: [github.com/arka-engine/docs/issues](https://github.com/arka-engine/docs/issues)
-- **Community Forum**: [community.arka-engine.io](https://community.arka-engine.io)
-- **Enterprise Support**: [support@arka-engine.io](mailto:support@arka-engine.io)
+- **GitHub Issues**: [github.com/arka-protocol/arka-core/issues](https://github.com/arka-protocol/arka-core/issues)
+- **Documentation Issues**: [github.com/arka-protocol/arka-docs/issues](https://github.com/arka-protocol/arka-docs/issues)
+- **Website**: [www.arkaprotocol.com](https://www.arkaprotocol.com)
+- **Contact**: [arkaprotocol.com/contact](https://www.arkaprotocol.com/#contact-form)
+
+## Online Documentation
+
+View the full documentation online at [www.arkaprotocol.com/docs](https://www.arkaprotocol.com/docs).
 
 ## License
 
-ARKA Engine is available under the [Apache 2.0 License](../LICENSE).
+ARKA Protocol is available under the [Apache 2.0 License](LICENSE).
+
+---
+
+Built with ❤️ by [ARKA Protocol](https://www.arkaprotocol.com)
