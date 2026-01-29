@@ -119,15 +119,18 @@ Full compliance infrastructure. Production-ready. Today.
 - Major banks, regulators, compliance providers
 - Recurring annual license + maintenance
 
-#### 2. Transaction Anchoring Fees
-- **$0.001 - $0.01** per attestation anchored
-- Volume-based pricing
-- 1B+ transactions/year at scale
+#### 2. Attestation & Usage Fees
+- **$0.25** per standard attestation unit
+- **$3.50** per high-assurance attestation (+ gas)
+- **$0.50** per 10,000 verification decisions
+- **$1.00** per 1,000 AI risk assessments
+- Volume-based pricing with enterprise discounts
 
 #### 3. SaaS Platform (ARKA Cloud)
-- **$50K - $500K/year** per institution
-- Multi-tenant compliance workflows
-- AI analysis credits included
+- **Core Enterprise**: $25,000/year (5M verifications, 10K attestations)
+- **Enterprise**: $85,000/year (25M verifications, 100K attestations)
+- **Government**: $180,000/year (unlimited, FedRAMP, dedicated support)
+- Multi-tenant compliance workflows with included usage
 
 ### Unit Economics
 

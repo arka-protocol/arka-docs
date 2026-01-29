@@ -251,9 +251,10 @@ Included:
     └── Community plugins
 
 Overage Rates:
-├── Additional users: $100/user/month
-├── Additional transactions: $0.01/transaction
-└── Additional storage: $1/GB/month
+├── Additional users: $50/user/month
+├── Verification decisions: $0.50/10,000
+├── Policy evaluations: $0.25/10,000
+└── Additional storage: $0.10/GB/month
 ```
 
 #### Professional Tier
@@ -282,7 +283,7 @@ Included:
 
 Overage Rates:
 ├── Additional users: $75/user/month
-├── Additional transactions: $0.005/transaction
+├── Verification decisions: $0.50/10,000
 └── Additional storage: $0.75/GB/month
 ```
 
@@ -315,7 +316,7 @@ Included:
     └── API rate limit: 10,000/min
 
 Overage Rates:
-├── Additional transactions: $0.002/transaction
+├── Verification decisions: $0.50/10,000 (volume discounts available)
 └── Additional storage: $0.50/GB/month
 ```
 
@@ -395,17 +396,17 @@ per_transaction_licensing:
     - webhook_delivery: "not counted"
 
   tiers:
-    starter:
-      included: 100000
-      overage: "$0.01/transaction"
-
-    professional:
-      included: 1000000
-      overage: "$0.005/transaction"
+    core_enterprise:
+      included: 5000000
+      overage: "$0.50/10,000 decisions"
 
     enterprise:
-      included: 10000000
-      overage: "$0.002/transaction"
+      included: 25000000
+      overage: "$0.50/10,000 decisions"
+
+    government:
+      included: "unlimited"
+      overage: "n/a"
 
   volume_discounts:
     - range: "10M-50M"
